@@ -1,8 +1,9 @@
 import processing.core.PApplet;
 
 public class Sketch extends PApplet {
-	
-	
+
+float circleX = 150;
+float circleY = 150;
   /**
    * Called once at the beginning of execution, put your size all in this method
    */
@@ -15,8 +16,13 @@ public class Sketch extends PApplet {
    * Called once at the beginning of execution.  Add initial set up
    * values here i.e background, stroke, fill etc.
    */
+
+  String message = "";
+  String yourMessage = "";
   public void setup() {
-    background(54, 32, 5);
+    background(46, 64, 255);
+    
+    textSize(30);
   }
 
   /**
@@ -24,29 +30,40 @@ public class Sketch extends PApplet {
    */
   public void draw() {
 
+    text(yourMessage, 25, 75);
+    
     if(keyPressed) {	
-    // purple background   
+    // orange background  
     if (key == '1') {
       background(255, 165, 38);
     } 
     // blue background
     else if (key == '2') {
-      background(0, 5, 46);
+      background(46, 64, 255);
     } 
-    // orange background
+    //  purple background
     else if (key == '3') {
-      background(0, 5, 46);
+      background(63, 0, 97);
+    }
+    // create smoke for house
+    else if (keyCode == UP) {
+      circleY--;
+    } 
+    else if (keyCode == DOWN) {
+      circleY++;
+    } 
+    else if(keyCode == LEFT){
+      circleX--;
+    }
+    else if(keyCode == RIGHT){
+     circleX++; 
     }
   } 
-
+    fill(255, 255, 255);
+    ellipse(circleX, circleY, 20, 20);
     //declare flower variables
     
-    float randomFlowerX = random(0, 400);
-    float randomFlowerY = random(0, 400);
-    float petalDiameter = random(20, 100);
-    float petalDistance = petalDiameter / 2;
 
-    //make water droplet on mouse
     //background(32);
     
     //fill(3, 48, 252);
@@ -56,7 +73,7 @@ public class Sketch extends PApplet {
     //flower(mouseX, mouseY, petalDiameter /3 ,  petalDistance /3);
     //ground((0), (float) (height / 1.6), (width), (height));
 
-    //Drawing house 
+    //Drawing house when click
   
     ground((0), (float) (height / 1.6), (width), (height));
     base((float) (width/4), (float) (height/2), (float) (width/4), (float) (height/4));
@@ -65,8 +82,10 @@ public class Sketch extends PApplet {
     roof((float) (width/4), (float) (height/2), (float) (width/2), (float) (height/2), (float) (width/2.66), (float) (height/2.5));
 
 
+  
 
-    
+    //code to write out text
+    text(message, 50, 50);
   } 
 
     }
@@ -74,40 +93,25 @@ public class Sketch extends PApplet {
 
   public void mouseDragged(){
     
-    //make a sun
+    //make a sun and clouds
 
     
     fill(252, 227, 3);
     ellipse((float) (width/1.333), (float) (height*.175), (float) (width/5), (float) (height/5));
 
-  /*
-  void flower(float randomFlowerX, float randomFlowerY, float petalDiameter, float petalDistance) {
-  //float petalDistance = petalSize / 2;
+    fill(255, 255, 255);
+    ellipse(mouseX, mouseY, 25, 25);
 
-  fill(300, 50, 20);
-
-            // upper left petal
-    fill(230, 0, 255);
-    ellipse(randomFlowerX - petalDistance, randomFlowerY - petalDistance, petalDiameter, petalDiameter);
-
-    // upper right petal
-    fill(230, 0, 255);
-    ellipse(randomFlowerX + petalDistance, randomFlowerY - petalDistance, petalDiameter, petalDiameter);
-
-    // bottom left petal
-    fill(230, 0, 255);
-    ellipse(randomFlowerX - petalDistance, randomFlowerY + petalDistance, petalDiameter, petalDiameter);
-
-    // bottom right petal
-    fill(230, 0, 255);
-    ellipse(randomFlowerX + petalDistance, randomFlowerY + petalDistance, petalDiameter, petalDiameter);
+    }
+  public void mouseMoved(){
     
-    // center of flower
-    fill(168, 111, 54);
-    ellipse(randomFlowerX, randomFlowerY, petalDiameter, petalDistance * 2);
+    //make a moon when mouse moved
 
-    */
-}
+    
+    fill(240, 212, 255);
+    ellipse((float) (width/1.333), (float) (height*.175), (float) (width/5), (float) (height/5));
+    }
+ 
 
     /** 
     Method for ground
@@ -168,5 +172,12 @@ public class Sketch extends PApplet {
       triangle(X1, Y1, X2, Y2, X3, Y3);
       }
 
+
+    //type out message
+    
+
+    public void keyTyped(){
+      yourMessage += key;
+    }
 
 }
